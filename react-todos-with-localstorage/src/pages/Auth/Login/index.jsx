@@ -2,7 +2,7 @@
 import { useAuth } from '@/context/Auth'
 import { Button, Form, Input, Typography } from 'antd'
 import React, {  useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const { Title, Paragraph } = Typography
 const { Item } = Form
@@ -14,6 +14,7 @@ const Login = () => {
 
   const [ isProcessing, setIsProcessing] = useState(false)
   const [state, setState] = useState(initialState)
+  const navigate = useNavigate()
 
   const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }))
 
@@ -40,7 +41,8 @@ const Login = () => {
    
    setTimeout(() => {
      setIsProcessing(false)
-      window.toastify("Login sucessfully", "success") 
+      window.toastify("Login sucessfully", "success")
+      navigate("/") 
     }, 500);
 
     // console.log('window.isValidEmail(email)', window.isValidEmail(email))

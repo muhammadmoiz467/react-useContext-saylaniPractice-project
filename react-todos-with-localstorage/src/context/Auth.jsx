@@ -1,7 +1,12 @@
 import { createContext, useContext, useReducer } from "react"
 
 const AuthContext = createContext()
-const initialState = { isAuth: false, user: {} }
+// const initialState = { isAuth: false, user: {} }
+const storedUser = JSON.parse(localStorage.getItem("user"))
+const initialState = {
+    isAuth : storedUser ? true : false,
+    user : storedUser || []
+}
 
 const reducer = (state, { type, payload }) => {
     const { user = {} } = payload
@@ -11,7 +16,7 @@ const reducer = (state, { type, payload }) => {
         case "SET_PROFILE":
             return { ...state, user }
         case "SET_LOGOUT":
-            return initialState
+            return { isAuth: false, user: {} }
         default:
             return state
 
@@ -22,8 +27,12 @@ const Auth = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
+     const handleLogout = () => {
+    localStorage.removeItem("user")
+    dispatch({type: "SET_LOGOUT"})
+     }
     return (
-        <AuthContext.Provider value={{ ...state, dispatch }}>
+        <AuthContext.Provider value={{ ...state, dispatch, handleLogout }}>
             {children}
         </AuthContext.Provider>
     )
