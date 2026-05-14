@@ -34,6 +34,8 @@ const Login = () => {
      return window.toastify("Invalid email or password", "error")
    }
 
+   localStorage.setItem("user", JSON.stringify(user))
+
    dispatch({
     type: "SET_LOGIN",
     payload: { user }
@@ -62,7 +64,7 @@ const Login = () => {
             <Item label="Password" required>
               <Input.Password size='large' placeholder="Enter your password" name="password" onChange={handleChange} />
             </Item>
-            <Button type='primary' size='large' block htmlType='submit' loading={isProcessing} onClick={handleLogin}>Create Account</Button>
+            <Button type='primary' size='large' block htmlType='submit' loading={isProcessing} onClick={handleLogin}>Login</Button>
           </Form>
         </div>
       </div>

@@ -1,14 +1,10 @@
-import { createContext, useContext, useReducer } from "react"
+import { createContext, useContext, useEffect, useReducer } from "react"
 
 const AuthContext = createContext()
-// const initialState = { isAuth: false, user: {} }
-const storedUser = JSON.parse(localStorage.getItem("user"))
-const initialState = {
-    isAuth : storedUser ? true : false,
-    user : storedUser || []
-}
+const initialState = { isAuth: false, user: {} }
+// const initialState = { isAuth :}
 
-const reducer = (state, { type, payload }) => {
+const reducer = (state, { type, payload = {} }) => {
     const { user = {} } = payload
     switch (type) {
         case "SET_LOGIN":
@@ -26,6 +22,20 @@ const reducer = (state, { type, payload }) => {
 const Auth = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
+
+    const readProfile = () => {
+        const user = JSON.parse(localStorage.getItem("user"))
+        
+        if (user) {
+
+            dispatch({ 
+                type: "SET_LOGIN", 
+                payload: {user} 
+            })
+        }
+    }
+
+    useEffect(() => { readProfile() }, [] )
 
      const handleLogout = () => {
     localStorage.removeItem("user")
