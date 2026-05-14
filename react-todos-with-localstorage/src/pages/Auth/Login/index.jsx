@@ -2,7 +2,7 @@
 import { useAuth } from '@/context/Auth'
 import { Button, Form, Input, Typography } from 'antd'
 import React, {  useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const { Title, Paragraph } = Typography
 const { Item } = Form
@@ -14,6 +14,7 @@ const Login = () => {
 
   const [ isProcessing, setIsProcessing] = useState(false)
   const [state, setState] = useState(initialState)
+  const navigate = useNavigate()
 
   const handleChange = e => setState(s => ({ ...s, [e.target.name]: e.target.value }))
 
@@ -33,6 +34,8 @@ const Login = () => {
      return window.toastify("Invalid email or password", "error")
    }
 
+   localStorage.setItem("user", JSON.stringify(user))
+
    dispatch({
     type: "SET_LOGIN",
     payload: { user }
@@ -40,7 +43,8 @@ const Login = () => {
    
    setTimeout(() => {
      setIsProcessing(false)
-      window.toastify("Login sucessfully", "success") 
+      window.toastify("Login sucessfully", "success")
+      navigate("/") 
     }, 500);
 
     // console.log('window.isValidEmail(email)', window.isValidEmail(email))
@@ -60,7 +64,7 @@ const Login = () => {
             <Item label="Password" required>
               <Input.Password size='large' placeholder="Enter your password" name="password" onChange={handleChange} />
             </Item>
-            <Button type='primary' size='large' block htmlType='submit' loading={isProcessing} onClick={handleLogin}>Create Account</Button>
+            <Button type='primary' size='large' block htmlType='submit' loading={isProcessing} onClick={handleLogin}>Login</Button>
           </Form>
         </div>
       </div>

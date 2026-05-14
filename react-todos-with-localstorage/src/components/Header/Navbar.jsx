@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const Navbar = () => {
 
-    const { isAuth } = useAuth()
+    const { isAuth, handleLogout } = useAuth()
 
     return (
         <header>
@@ -26,14 +26,14 @@ const Navbar = () => {
                         </ul>
                         <div className="d-flex">
                             <Space>
-                                {!isAuth
+                                {isAuth
                                     ? <>
-                                        <Link to="/auth/login" className="btn btn-success">Login</Link>
-                                        <Link to="/auth/register" className="btn btn-info">Register</Link>
+                                        <Link to="/dashboard" className="btn btn-info">Dashboard</Link>
+                                        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
                                     </>
                                     : <>
-                                        <Link to="/dashboard" className="btn btn-info">Dashboard</Link>
-                                        <button className="btn btn-danger">Logout</button>
+                                        <Link to="/auth/login" className="btn btn-success">Login</Link>
+                                        <Link to="/auth/register" className="btn btn-info">Register</Link>
                                     </>
                                 }
                             </Space>
