@@ -20,9 +20,9 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <Link to="/" className="nav-link">Home</Link>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link to="/todos" className="nav-link">My Todos</Link>
-                            </li>
+                            </li> */}
                         </ul>
                         <div className="d-flex">
                             <Space>

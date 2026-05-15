@@ -7,10 +7,10 @@ import Dashboard from './Dashboard'
 const Index = () => {
   return (
     <Routes>
-      <Route path='/*' element={<Frontend />} />
       <Route path='/auth/*' element={<Auth />} />
       <Route path='/dashboard/*' element={<Dashboard />} />
-      <Route path='*' element={<h1>Page Not Found!</h1>} />
+      <Route path='/*' element={<Frontend />} />
+      {/* <Route path='*' element={<h1>Page Not Found!</h1>} /> */}
     </Routes>
   )
 }

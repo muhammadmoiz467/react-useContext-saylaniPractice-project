@@ -1,7 +1,7 @@
 import React from 'react'
 import Hero from './Hero'
 
-const Todos = () => {
+const TodosMy = () => {
     return (
         <main>
             <Hero />
@@ -9,4 +9,4 @@ const Todos = () => {
     )
 }
 
-export default Todos
+export default TodosMy
